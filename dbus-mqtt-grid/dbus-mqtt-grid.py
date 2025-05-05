@@ -339,6 +339,11 @@ class DbusMqttGridService:
         # self._dbusservice.add_path('/HardwareVersion', '')
         self._dbusservice.add_path("/Connected", 1)
 
+        # Used by hub4control to know how fast it can make its control loop.
+        # https://github.com/victronenergy/dbus-shelly/blob/master/meter.py#L91
+        # https://github.com/victronenergy/dbus-cgwacs/blob/master/software/src/ac_sensor_bridge.cpp#L113
+        self._dbusservice.add_path('/RefreshTime', 1000) # ms  
+        
         self._dbusservice.add_path("/Latency", None)
 
         for path, settings in self._paths.items():
